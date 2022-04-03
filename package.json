@@ -1,5 +1,5 @@
 {
-  "name": "assignment-01",
+  "name": "assignment-02",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "mongoose": "^6.2.9",
+    "mongoose-currency": "^0.2.0"
   }
 }

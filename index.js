@@ -6,29 +6,39 @@
  */
 
 
-//External dependencies
-const express = require('express');
+//External Imports
+const express = require("express");
+const mongoose = require("mongoose");
 
-const dishRouter = require('./Routes/dishesRoute');
-const leadersRoute = require('./Routes/leadersRoute');
-const promoRouter = require('./Routes/promoRoute');
+//Router Imports
+const dishRouter = require("./routes/dishRouter");
+const promoRouter = require("./routes/promoRouter");
+const leaderRouter = require("./routes/leaderRouter");
 
-//creat app
+//Creating connection With MongoDB
+const MONGO_STRING = "mongodb://0.0.0.0:27017/nodeApp";
+mongoose
+  .connect(MONGO_STRING)
+  .then(() => {
+    console.log("Connection With Mongo has been established...");
+  })
+  .catch((err) => {
+    console.log("There is an Error");
+    console.log(err);
+  });
+
+//creating express app
 const app = express();
 
-//
+//body Parser setup
 app.use(express.json());
 
-//adding dishesRouter in this app
-app.use('/dishes',dishRouter);
-app.use('/leaders',leadersRoute);
-app.use('/promos',promoRouter);
+//Setup Routers
+app.use("/dishes", dishRouter);
+app.use("/promotions", promoRouter);
+app.use("/leaders", leaderRouter);
 
-app.all('/',(req,res) => {
-    res.status(404).send('This url is not valid');
-})
-
-
-app.listen(4000,() => {
-    console.log('Listening on port 4000....');
-})
+//Listening
+app.listen(3000, () => {
+  console.log("Listening on port 3000....");
+});
